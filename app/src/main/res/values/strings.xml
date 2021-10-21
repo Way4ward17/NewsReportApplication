@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Report</string>
+
+    <string-array name="year">
+        <item>English (United States)</item>
+    </string-array>
+
+</resources>

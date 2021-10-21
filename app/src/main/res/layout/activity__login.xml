@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:context=".Activity.ActivityLogin"
+    android:background="@color/colorWhite"
+
+    android:orientation="vertical">
+
+<Spinner
+    android:layout_width="wrap_content"
+    android:gravity="center"
+    android:saveEnabled="false"
+    android:clickable="false"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="5dp"
+    android:entries="@array/year"
+    android:layout_height="wrap_content">
+
+</Spinner>
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+<RelativeLayout
+    android:padding="15dp"
+
+    android:layout_gravity="center"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:layout_centerHorizontal="true"
+        android:layout_width="60dp"
+        android:id="@+id/logo1"
+        android:layout_height="60dp"
+        android:src="@drawable/statusreport"
+        />
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:id="@+id/card"
+    android:layout_below="@id/logo1"
+    android:layout_height="wrap_content">
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="14dp"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+<LinearLayout
+
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/emailPane"
+        android:layout_height="wrap_content">
+
+        <EditText
+
+            android:padding="10dp"
+android:background="@drawable/button"
+            android:hint="Email"
+            android:layout_width="match_parent"
+            android:id="@+id/emailLogin"
+            android:layout_height="40dp"
+            android:inputType="textEmailAddress"/>
+    </LinearLayout>
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+
+
+        <LinearLayout
+            android:gravity="center"
+            android:layout_below="@+id/emailPane"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+
+            <EditText
+                android:id="@+id/emailPassword"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="@drawable/button"
+                android:hint="Password"
+                android:inputType="textPassword"
+                android:padding="10dp" />
+        </LinearLayout>
+    </LinearLayout>
+
+        <Button
+            android:layout_gravity="center"
+            android:id="@+id/login"
+            android:textStyle="bold"
+            android:text="Login"
+            android:fontFamily="@font/nunito"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/card"
+            android:background="@drawable/buttonlogin"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/nunito"
+            android:gravity="center"
+            android:text="OR" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/nunito"
+                android:layout_gravity="center"
+                android:text="Dont have an account?"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/signupButton"
+                android:layout_width="100dp"
+                android:gravity="center"
+                android:fontFamily="@font/nunito"
+                android:layout_gravity="center"
+                android:text="Sign up."
+                android:textStyle="bold"
+                android:layout_height="70dp"/>
+
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/colorRed"
+            android:layout_gravity="center"
+            android:onClick="openDia"
+            android:fontFamily="@font/nunito"
+            android:text="Forget Password ?"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+
+
+</RelativeLayout>
+
+
+
+
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+    </ScrollView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_alignParentBottom="true"
+android:gravity="center"
+    android:orientation="vertical"
+    android:layout_height="wrap_content">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="5dp"
+        android:textSize="15dp"
+        android:fontFamily="@font/nunito_semibold"
+        android:gravity="center"
+        android:layout_marginBottom="4dp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:text="TheWay4wardAcademy" />
+</LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "888324296854",
+    "project_id": "report-df6cc",
+    "storage_bucket": "report-df6cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:888324296854:android:4afee8fde286b0aa39f2b7",
+        "android_client_info": {
+          "package_name": "com.theway4wardacademy.report"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "888324296854-e7ifmsla5l20hbch69018t30tgj5fv5r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB1NtFQiBKs95kwQCPXkya9PAq66DGPf1w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "888324296854-e7ifmsla5l20hbch69018t30tgj5fv5r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
