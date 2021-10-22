@@ -78,8 +78,9 @@
         <EditText
 
             android:padding="10dp"
-android:background="@drawable/button"
+            android:background="@drawable/button"
             android:hint="Email"
+            android:text="testing@email.com"
             android:layout_width="match_parent"
             android:id="@+id/emailLogin"
             android:layout_height="40dp"
@@ -110,6 +111,7 @@ android:background="@drawable/button"
                 android:layout_height="40dp"
                 android:background="@drawable/button"
                 android:hint="Password"
+                android:text="password"
                 android:inputType="textPassword"
                 android:padding="10dp" />
         </LinearLayout>

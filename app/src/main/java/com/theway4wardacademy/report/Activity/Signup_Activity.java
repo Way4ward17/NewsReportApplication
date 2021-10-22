@@ -3,6 +3,7 @@ package com.theway4wardacademy.report.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
@@ -14,6 +15,7 @@ import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -76,21 +78,21 @@ public class Signup_Activity extends AppCompatActivity {
     ArrayAdapter<String> agentAdapter;
     RequestQueue requestQueue;
 
-    FirebaseUser fuser;
-    String userid, deviceToken;
-    private int USERNAME_STATUS = 0;
+    String userid;
     private EditText fullname, usernamee, password, mail, code;
-    private Spinner faculty, department;
+    private Spinner department;
     private Button submit;
     RadioButton userRadio, agentRadio;
-    ProgressBar usernameprogressbar;
     private TextView login, read;
     private ImageView back;
-    Dialog dialogg;
+    Dialog dialog, dialogg;
+    ProgressBar progressBar;
     FirebaseAuth auth;
     DatabaseReference reference;
     String paystack_public_key = "https://theway4wardacademy.com/datapolicy.html";
     LinearLayout agentListPane;
+    String acctType = "";
+    int click = 0;
     private static final String TAG = "Signup_Activity";
 
     @Override
@@ -134,9 +136,22 @@ public class Signup_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        department.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                click = 1;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+                View parentLayout = findViewById(android.R.id.content);
+                Snackbar.make(parentLayout, "Select an agent", Snackbar.LENGTH_SHORT).show();
+            }
+        });
 
 
         getList();
+        initWideget();
     }
 
 
@@ -177,11 +192,53 @@ public class Signup_Activity extends AppCompatActivity {
 
     public void userClick(View view) {
         agentListPane.setVisibility(View.GONE);
+        acctType = "user";
     }
     public void agentClick(View view) {
         agentListPane.setVisibility(View.VISIBLE);
+        acctType = "agent";
     }
 
+
+
+    public void onClicku(View view) {
+        dialog.show();
+        String username = usernamee.getText().toString();
+        String txt_username = fullname.getText().toString();
+
+        String txt_email = mail.getText().toString();
+        String txt_password = password.getText().toString();
+        String txt_dept = department.getSelectedItem().toString();
+        String codes = code.getText().toString();
+
+
+
+
+        if (TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
+            View parentLayout = findViewById(android.R.id.content);
+            Snackbar.make(parentLayout, "Alaye, fill the necessary forms now", Snackbar.LENGTH_SHORT).show();
+            dialog.hide();
+        } else if (txt_password.length() < 6) {
+            dialog.hide();
+            View parentLayout = findViewById(android.R.id.content);
+            Snackbar.make(parentLayout, "Your password must pass 6 characters", Snackbar.LENGTH_SHORT).show();
+
+        }else if(acctType ==""){
+            dialog.hide();
+            View parentLayout = findViewById(android.R.id.content);
+            Snackbar.make(parentLayout, "Select an Acct Type", Snackbar.LENGTH_SHORT).show();
+        } else {
+            if (click == 0 && agentListPane.getVisibility() == View.VISIBLE) {
+                dialog.hide();
+                View parentLayout = findViewById(android.R.id.content);
+                Snackbar.make(parentLayout, "Select an agent", Snackbar.LENGTH_SHORT).show();
+
+            } else {
+                saveUser(Random(), username, txt_username, acctType, txt_email, txt_password, txt_dept, codes);
+            }
+        }
+
+    }
 
 
     private void saveUser(String userId,
@@ -189,7 +246,10 @@ public class Signup_Activity extends AppCompatActivity {
                           String fullName,
                           String acctType,
                           String email,
-                          String password){
+                          String password,
+                          String department,
+                          String code
+                          ){
 
         AndroidNetworking.post(Constant.REG)
                 .addBodyParameter("userid", userId)
@@ -197,7 +257,9 @@ public class Signup_Activity extends AppCompatActivity {
                 .addBodyParameter("fullname", fullName)
                 .addBodyParameter("accttype", acctType)
                 .addBodyParameter("email", email)
-                .addBodyParameter("password", password )
+                .addBodyParameter("password", password)
+                .addBodyParameter("department", department)
+                .addBodyParameter("code", code)
 
                 .setTag("uploadTest")
                 .setPriority(Priority.HIGH)
@@ -221,9 +283,11 @@ public class Signup_Activity extends AppCompatActivity {
                             String message = product1.getString("message");
 
                             if(success == 0) {
+                                dialog.hide();
                                 Toast.makeText(Signup_Activity.this, "Error"+message, Toast.LENGTH_LONG).show();
                             }else{
-                                FirebaseAuth.getInstance().signOut();
+                                dialog.hide();
+
                                 Toast.makeText(Signup_Activity.this, message, Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(Signup_Activity.this, MainActivity.class);
                                 startActivity(intent);
@@ -231,6 +295,7 @@ public class Signup_Activity extends AppCompatActivity {
                             }
 
                         } catch (JSONException ex) {
+                            dialog.hide();
                             ex.printStackTrace();
                             Toast.makeText(Signup_Activity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                         }
@@ -239,6 +304,7 @@ public class Signup_Activity extends AppCompatActivity {
 
                     @Override
                     public void onError(ANError anError) {
+                        dialog.hide();
                         Toast.makeText(getApplicationContext(), "Error Uploading"+anError,Toast.LENGTH_LONG).show();
 
                     }
@@ -248,7 +314,13 @@ public class Signup_Activity extends AppCompatActivity {
 
 
 
-
+    private void initWideget(){
+        dialog = new Dialog(Signup_Activity.this);
+        dialog.setContentView(R.layout.dialogloading);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCanceledOnTouchOutside(false);
+        progressBar = (ProgressBar)dialog.findViewById(R.id.spin_kit);
+    }
 
 
 
@@ -427,38 +499,6 @@ public class Signup_Activity extends AppCompatActivity {
         hashMap.put("token", token);
 
         reference.setValue(hashMap);
-    }
-
-    public void onClicku(View view) {
-
-        String txt_username = fullname.getText().toString();
-        String txt_password = password.getText().toString();
-        String txt_email = mail.getText().toString();
-        String txt_dept = department.getSelectedItem().toString();
-        String txt_faculty = faculty.getSelectedItem().toString();
-        String username = usernamee.getText().toString();
-
-
-        if (TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
-            View parentLayout = findViewById(android.R.id.content);
-            Snackbar.make(parentLayout, "Alaye, fill the necessary forms now", Snackbar.LENGTH_SHORT).show();
-
-        } else if (txt_password.length() < 6) {
-            View parentLayout = findViewById(android.R.id.content);
-            Snackbar.make(parentLayout, "Your password must pass 6 characters", Snackbar.LENGTH_SHORT).show();
-
-
-        } else if (USERNAME_STATUS == 1) {
-
-            View parentLayout = findViewById(android.R.id.content);
-            Snackbar.make(parentLayout, "You no see sey the username show RED!", Snackbar.LENGTH_SHORT).show();
-
-        } else {
-            register(txt_username, txt_password, txt_dept, txt_faculty, txt_email, username);
-
-        }
-
-
     }
 
 

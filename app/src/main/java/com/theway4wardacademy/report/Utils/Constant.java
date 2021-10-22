@@ -8,5 +8,6 @@ public class Constant {
     public static final String URL = "http://way4wardproject.com.ng/report/php/";//"http://192.168.43.176/";
     public static final String REG = URL+"register.php";
     public static final String GETAGENT = URL+"getagent.php";
+    public static final String LOGIN = URL+"login.php";
 
 }
