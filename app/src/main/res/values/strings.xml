@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Report</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">My Feeds</string>
+    <string name="title_settings">Profile</string>
 
     <string-array name="year">
         <item>English (United States)</item>

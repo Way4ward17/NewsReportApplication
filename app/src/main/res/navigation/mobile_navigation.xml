@@ -7,22 +7,18 @@
 
     <fragment
         android:id="@+id/navigation_home"
-        android:name="com.theway4wardacademy.lic.Fragment.HomeFragment"
+        android:name="com.theway4wardacademy.report.Fragment.HomeFragment"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.theway4wardacademy.lic.Fragment.TrendingTop"
+        android:name="com.theway4wardacademy.report.Fragment.TrendingTop"
         tools:layout="@layout/fragment_trending_top" />
 
-    <fragment
-        android:id="@+id/navigation_library"
-        android:name="com.theway4wardacademy.lic.Fragment.Library"
-        tools:layout="@layout/fragment_library" />
 
 
     <fragment
         android:id="@+id/navigation_notifications"
-        android:name="com.theway4wardacademy.lic.Fragment.NotificationsFragment"
+        android:name="com.theway4wardacademy.report.Fragment.NotificationsFragment"
         tools:layout="@layout/fragment_notifications" />
 </navigation>

@@ -27,7 +27,7 @@ package com.theway4wardacademy.report.Activity;
         import com.theway4wardacademy.report.R;
 
 
-public class Mainbottom extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private static final int PERMISSION_STORAGE_CODE = 1000;
 
     final Fragment fragment1 = new HomeFragment();
@@ -53,7 +53,7 @@ public class Mainbottom extends AppCompatActivity {
 
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.search,R.id.navigation_library , R.id.navigation_notifications)
+                R.id.navigation_home, R.id.search, R.id.navigation_notifications)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
