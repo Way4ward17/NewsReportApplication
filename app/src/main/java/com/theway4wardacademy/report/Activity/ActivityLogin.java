@@ -71,7 +71,7 @@ public class ActivityLogin extends AppCompatActivity {
         Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.show();
+
                 InputMethodManager imm = (InputMethodManager)getSystemService(Activity.INPUT_METHOD_SERVICE);
                 imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
                 final String txt_email = emailLogin1.getText().toString();
@@ -96,7 +96,7 @@ public class ActivityLogin extends AppCompatActivity {
                                 @Override
                                 public void onProgress(long bytesUploaded, long totalBytes) {
                                     // do anything with progress
-
+                                    dialog.show();
                                     float progress = (float)bytesUploaded/totalBytes * 100;
                                 }
                             })

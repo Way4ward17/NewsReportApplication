@@ -52,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.search, R.id.navigation_notifications)
-                .build();
+//        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+//                R.id.navigation_home, R.id.to, R.id.navigation_notifications)
+//                .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         // NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navigation, navController);
