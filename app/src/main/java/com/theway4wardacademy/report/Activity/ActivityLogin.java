@@ -82,7 +82,7 @@ public class ActivityLogin extends AppCompatActivity {
                     Snackbar.make(parentLayout, "Sho!!.. You wan login without anything .. ", Snackbar.LENGTH_SHORT).show();
 
                 } else {
-
+                    dialog.show();
                     AndroidNetworking.post(Constant.LOGIN)
 
                             .addBodyParameter("email", txt_email)
@@ -96,7 +96,7 @@ public class ActivityLogin extends AppCompatActivity {
                                 @Override
                                 public void onProgress(long bytesUploaded, long totalBytes) {
                                     // do anything with progress
-                                    dialog.show();
+
                                     float progress = (float)bytesUploaded/totalBytes * 100;
                                 }
                             })
@@ -110,11 +110,11 @@ public class ActivityLogin extends AppCompatActivity {
                                         int success = product1.getInt("status");
 
                                         if(success == 0) {
-                                            dialog.hide();
+                                            dialog.dismiss();
                                             View parentLayout = findViewById(android.R.id.content);
                                             Snackbar.make(parentLayout, "Incorrect login", Snackbar.LENGTH_SHORT).show();
                                         }else{
-                                            dialog.hide();
+                                            dialog.dismiss();
                                             Intent intent = new Intent(ActivityLogin.this, MainActivity.class);
                                             startActivity(intent);
                                             finish();
@@ -130,7 +130,7 @@ public class ActivityLogin extends AppCompatActivity {
 
                                 @Override
                                 public void onError(ANError anError) {
-                                    dialog.hide();
+                                    dialog.dismiss();
                                     Toast.makeText(getApplicationContext(), "Error Uploading"+anError,Toast.LENGTH_LONG).show();
 
                                 }

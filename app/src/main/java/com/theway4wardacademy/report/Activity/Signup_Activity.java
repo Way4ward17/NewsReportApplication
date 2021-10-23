@@ -217,19 +217,19 @@ public class Signup_Activity extends AppCompatActivity {
         if (TextUtils.isEmpty(txt_username) || TextUtils.isEmpty(txt_email) || TextUtils.isEmpty(txt_password)) {
             View parentLayout = findViewById(android.R.id.content);
             Snackbar.make(parentLayout, "Alaye, fill the necessary forms now", Snackbar.LENGTH_SHORT).show();
-            dialog.hide();
+            dialog.dismiss();
         } else if (txt_password.length() < 6) {
-            dialog.hide();
+            dialog.dismiss();
             View parentLayout = findViewById(android.R.id.content);
             Snackbar.make(parentLayout, "Your password must pass 6 characters", Snackbar.LENGTH_SHORT).show();
 
         }else if(acctType ==""){
-            dialog.hide();
+            dialog.dismiss();
             View parentLayout = findViewById(android.R.id.content);
             Snackbar.make(parentLayout, "Select an Acct Type", Snackbar.LENGTH_SHORT).show();
         } else {
             if (click == 0 && agentListPane.getVisibility() == View.VISIBLE) {
-                dialog.hide();
+                dialog.dismiss();
                 View parentLayout = findViewById(android.R.id.content);
                 Snackbar.make(parentLayout, "Select an agent", Snackbar.LENGTH_SHORT).show();
 
@@ -283,10 +283,10 @@ public class Signup_Activity extends AppCompatActivity {
                             String message = product1.getString("message");
 
                             if(success == 0) {
-                                dialog.hide();
+                                dialog.dismiss();
                                 Toast.makeText(Signup_Activity.this, "Error"+message, Toast.LENGTH_LONG).show();
                             }else{
-                                dialog.hide();
+                                dialog.dismiss();
 
                                 Toast.makeText(Signup_Activity.this, message, Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(Signup_Activity.this, MainActivity.class);
@@ -295,7 +295,7 @@ public class Signup_Activity extends AppCompatActivity {
                             }
 
                         } catch (JSONException ex) {
-                            dialog.hide();
+                            dialog.dismiss();
                             ex.printStackTrace();
                             Toast.makeText(Signup_Activity.this, ex.getMessage(), Toast.LENGTH_LONG).show();
                         }
