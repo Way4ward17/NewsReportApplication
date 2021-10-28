@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relative"
+    android:orientation="vertical">
+
+
+
+
+    <ProgressBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="87dp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:id="@+id/babaCard"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp">
+
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="5dp"
+
+            >
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="300dp">
+
+    <TextView
+        android:id="@+id/headies"
+        android:fontFamily="@font/nunito"
+        android:layout_width="match_parent"
+        android:text="Ebola Strikes Akare Again"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textColor="@color/colorBlack"
+        android:layout_height="wrap_content"
+        />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/imageViewPost"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="100dp"
+            android:src="@drawable/ic_baseline_slow_motion_video_24" />
+
+
+    </RelativeLayout>
+</LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:src="@drawable/ic_baseline_person_24"
+                        android:layout_height="30dp"
+                        />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_height="wrap_content">
+                        <TextView
+                            android:fontFamily="@font/nunito"
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold"
+                            android:id="@+id/namePost"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:text="  John Kelvin"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:fontFamily="@font/nunito"
+                            android:textColor="@color/colorBlack"
+                            android:textStyle="bold"
+                            android:id="@+id/timePost"
+                            android:layout_marginLeft="10dp"
+                            android:layout_width="wrap_content"
+                            android:text="  7:50pm  10/14/2019"
+                            android:layout_height="wrap_content" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+
+                    android:id="@+id/post"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:layout_marginLeft="5sp"
+                    android:fontFamily="@font/nunito"
+                    android:lineSpacingMultiplier="1.0"
+                    android:text="accurate and honest collection remains the same. The goal for all data collection is to capture quality evidence that allows analysis to lead to the formulation of convincing and credible answers to the questions that have been posed. Data collection methods can be divided into two categories: secondary methods of data collection and primary methods of data collection."
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:gravity="end"
+                    android:id="@+id/morePost"
+                    android:layout_marginTop="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="25dp"
+                    android:textColor="@color/colorRed"
+                    android:layout_marginLeft="5sp"
+                    android:fontFamily="@font/nunito"
+                    android:lineSpacingMultiplier="1.0"
+                    android:text="READ MORE...."
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
+            </LinearLayout>
+
+
+
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</RelativeLayout>
