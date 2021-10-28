@@ -50,8 +50,9 @@ dependencies {
 
     implementation 'androidx.navigation:navigation-fragment:2.3.0'
     implementation 'androidx.navigation:navigation-ui:2.3.0'
-
+    implementation 'com.google.android.exoplayer:exoplayer:2.11.0'
     implementation 'com.iceteck.silicompressorr:silicompressor:2.2.2'
+    implementation 'com.danikula:videocache:2.7.1'
 
 
 }

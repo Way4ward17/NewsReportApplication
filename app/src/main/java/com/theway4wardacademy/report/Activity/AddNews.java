@@ -18,8 +18,6 @@ import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
-
-
 import com.iceteck.silicompressorr.FileUtils;
 import com.iceteck.silicompressorr.SiliCompressor;
 import com.theway4wardacademy.report.R;
@@ -45,7 +43,7 @@ public class AddNews extends AppCompatActivity {
             Environment.getExternalStorageDirectory() + IMAGE_DIRECTORY + "/Delete Regularly");
 
 
-    ActivityResultLauncher<String> mGetContent, mGetContent2,mGetContentAudio;
+    ActivityResultLauncher<String> mGetContent, mGetContent2,mGetContentAudio, mGetContentVideo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,6 +61,16 @@ public class AddNews extends AppCompatActivity {
             }
         });
 
+        mGetContentVideo = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+
+                new setVideo().execute(result);
+
+            }
+        });
+
+
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
@@ -71,13 +79,6 @@ public class AddNews extends AppCompatActivity {
             }
         });
 
-        mGetContent2 = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
-            @Override
-            public void onActivityResult(Uri result) {
-                imageView2.setImageURI(result);
-
-            }
-        });
 
     }
 
@@ -92,8 +93,8 @@ public class AddNews extends AppCompatActivity {
         mGetContentAudio.launch("audio/*");
     }
 
-    public void chooseImage2(View view) {
-        mGetContent2.launch("image/*");
+    public void chooseVideo(View view) {
+        mGetContentVideo.launch("video/*");
     }
 
     public void uploadPost(View view) {
@@ -118,7 +119,7 @@ public class AddNews extends AppCompatActivity {
 
 
 
-    class setVideo extends AsyncTask<Intent,Void,Void> {
+    class setVideo extends AsyncTask<Uri,Void,Void> {
 
         @Override
         protected void onPreExecute() {
@@ -127,9 +128,9 @@ public class AddNews extends AppCompatActivity {
         }
 
         @Override
-        protected Void doInBackground(Intent... data) {
+        protected Void doInBackground(Uri... data) {
 
-            Uri videoContentUri = data[0].getData();
+            Uri videoContentUri = data[0];
             String path = FileUtils.getPath(AddNews.this, videoContentUri);
             videoFile = new File(path);
             videoUri = Uri.fromFile(videoFile);
@@ -139,6 +140,12 @@ public class AddNews extends AppCompatActivity {
             fileVideoImage = new File(pathVideoImage);
 
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            imageView1.setImageURI(videoImageUri);
         }
     }
 

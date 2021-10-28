@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:onClick="hide"
+    android:background="@color/colorBlack"
+    app:cardElevation="1dp"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relative"
+    android:elevation="4dp"
+    android:orientation="vertical">
+
+
+
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/page"
+        android:onClick="hide"
+        android:layout_centerHorizontal="true"
+       >
+
+
+
+        <com.google.android.exoplayer2.ui.PlayerView
+            android:id="@+id/ep_video_view"
+            android:onClick="hide"
+            android:layout_centerInParent="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorBlack"
+            />
+
+        <SeekBar
+            android:layout_alignParentBottom="true"
+            android:id="@+id/progressBar"
+            android:indeterminateTint="@color/colorWhite"
+            style="@android:style/Widget.Holo.ProgressBar.Horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="30dp"
+            android:max="100" />
+        <ProgressBar
+            android:layout_width="20dp"
+            android:id="@+id/progress"
+            android:layout_centerInParent="true"
+            android:layout_height="20dp"/>
+
+
+    </RelativeLayout>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/button2"
+        android:text="Watch Again"
+        android:id="@+id/again"
+        android:visibility="gone"
+        android:onClick="againWatch"
+        android:fontFamily="@font/nunito_semibold"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:padding="10dp"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>

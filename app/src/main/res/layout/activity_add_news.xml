@@ -38,40 +38,46 @@
 
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="Photos"
             android:onClick="chooseImage"
-            android:padding="12dp"
-            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:gravity="center"
+            android:layout_margin="5dp"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold"
             android:background="@drawable/buttonyellow"
             android:layout_height="wrap_content"/>
 
 
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:text="Photos 1"
-            android:padding="12dp"
-            android:onClick="chooseImage2"
-            android:layout_margin="10dp"
-            android:textColor="@color/colorWhite"
-            android:textStyle="bold"
-            android:background="@drawable/buttonyellow"
-            android:layout_height="wrap_content"/>
-
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
             android:text="Audio"
+            android:gravity="center"
             android:onClick="chooseAudio"
-            android:padding="12dp"
-            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:layout_margin="5dp"
             android:textColor="@color/colorWhite"
-            android:textStyle="bold"
             android:background="@drawable/buttonyellow"
             android:layout_height="wrap_content"/>
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:text="Video"
+            android:onClick="chooseVideo"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:gravity="center"
+            android:textColor="@color/colorWhite"
+            android:background="@drawable/buttonyellow"
+            android:layout_height="wrap_content"/>
+
     </LinearLayout>
 
     <LinearLayout
