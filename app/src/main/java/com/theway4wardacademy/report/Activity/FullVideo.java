@@ -52,6 +52,7 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 import com.theway4wardacademy.report.R;
+import com.theway4wardacademy.report.Utils.Report;
 
 
 import org.json.JSONException;
@@ -68,6 +69,7 @@ public class FullVideo extends AppCompatActivity implements CacheListener {
     String url;
     TextView again;
     Runnable runnable;
+    ProgressBar progress;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -77,7 +79,7 @@ public class FullVideo extends AppCompatActivity implements CacheListener {
         setContentView(R.layout.activity_full_video);
 
         playerView = findViewById(R.id.ep_video_view);
-
+        progress = findViewById(R.id.progress);
         progressBar = findViewById(R.id.progressBar);
         again = (TextView)findViewById(R.id.again);
 
@@ -155,7 +157,7 @@ public class FullVideo extends AppCompatActivity implements CacheListener {
         exoPlayer.setPlayWhenReady(true);
     }
     private void checkCachedState() {
-        HttpProxyCacheServer proxy = AAUA_Updates.getProxy(FullVideo.this);
+        HttpProxyCacheServer proxy = Report.getProxy(FullVideo.this);
         boolean fullyCached = proxy.isCached(url);
         setCachedState(fullyCached);
         if (fullyCached) {
@@ -168,7 +170,7 @@ public class FullVideo extends AppCompatActivity implements CacheListener {
 
 
         try {
-            HttpProxyCacheServer proxy = AAUA_Updates.getProxy(this);
+            HttpProxyCacheServer proxy = Report.getProxy(this);
             proxy.registerCacheListener(this, Videourl);
 
             String proxyUrl = proxy.getProxyUrl(Videourl);
@@ -268,7 +270,7 @@ public class FullVideo extends AppCompatActivity implements CacheListener {
 
     private SimpleExoPlayer setupPlayer() {
         playerView.setUseController(false);
-        HttpProxyCacheServer proxy = AAUA_Updates.getProxy(FullVideo.this);
+        HttpProxyCacheServer proxy = Report.getProxy(FullVideo.this);
         proxy.registerCacheListener(this, url);
         String proxyUrl = proxy.getProxyUrl(url);
 
@@ -314,7 +316,7 @@ public class FullVideo extends AppCompatActivity implements CacheListener {
 
     @Override
     protected void onStop() {
-        AAUA_Updates.getProxy(FullVideo.this).unregisterCacheListener(this);
+        Report.getProxy(FullVideo.this).unregisterCacheListener(this);
         super.onStop();
     }
 
