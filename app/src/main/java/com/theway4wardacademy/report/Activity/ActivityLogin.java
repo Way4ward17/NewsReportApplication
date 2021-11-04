@@ -30,6 +30,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.theway4wardacademy.report.R;
 import com.theway4wardacademy.report.Utils.Constant;
+import com.theway4wardacademy.report.Utils.SharedPrefManager;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -108,6 +109,8 @@ public class ActivityLogin extends AppCompatActivity {
                                     try {
                                         JSONObject product1 = new JSONObject(response);
                                         int success = product1.getInt("status");
+                                        String userid = product1.getString("userid");
+                                        SharedPrefManager.getInstance(ActivityLogin.this).saveID(userid);
 
                                         if(success == 0) {
                                             dialog.dismiss();

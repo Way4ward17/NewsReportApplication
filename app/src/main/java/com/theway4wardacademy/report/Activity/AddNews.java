@@ -8,7 +8,9 @@ import android.content.ContentUris;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.media.MediaMetadataRetriever;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
@@ -20,6 +22,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
 
@@ -55,9 +59,11 @@ public class AddNews extends AppCompatActivity {
     Uri videoUri, videoImageUri;
     EditText text;
     MediaMetadataRetriever retriever;
-
+    MediaPlayer mediaPlayer;
     String textForm;
     String date;
+    TextView audioBtn, videoBtn, imageBtn;
+    String videoAv = "No", audioAv = "No", imageAv = "No";
 
 
     private static final String IMAGE_DIRECTORY = "/Report";
@@ -75,11 +81,17 @@ public class AddNews extends AppCompatActivity {
         imageView2 = (ImageView)findViewById(R.id.imageView2);
         text = (EditText)findViewById(R.id.textField);
 
+        audioBtn = (TextView) findViewById(R.id.audioButton);
+        videoBtn = (TextView) findViewById(R.id.videoButton);
+        imageBtn = (TextView) findViewById(R.id.photoButton);
+
 
         mGetContentAudio = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
-                imageView1.setImageURI(result);
+                audioBtn.setBackgroundColor(Color.parseColor("#FF14A81B"));
+                audioAv = "Yes";
+                //mediaPlayer = MediaPlayer.create(AddNews.this,result);
 
             }
         });
@@ -87,7 +99,8 @@ public class AddNews extends AppCompatActivity {
         mGetContentVideo = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
-
+                videoBtn.setBackgroundColor(Color.parseColor("#FF14A81B"));
+                videoAv = "Yes";
                 new setVideo().execute(result);
 
             }
@@ -97,6 +110,8 @@ public class AddNews extends AppCompatActivity {
         mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
             @Override
             public void onActivityResult(Uri result) {
+                imageBtn.setBackgroundColor(Color.parseColor("#FF14A81B"));
+                imageAv = "Yes";
                 imageView1.setImageURI(result);
 
             }
@@ -121,8 +136,7 @@ public class AddNews extends AppCompatActivity {
     }
 
     public void uploadPost(View view) {
-
-
+        UploadVideo();
     }
 
 
@@ -147,9 +161,12 @@ public class AddNews extends AppCompatActivity {
                 .addMultipartFile("image2", videoFile)
                 .addMultipartParameter("folder", SharedPrefManager.getInstance(AddNews.this).getID())
                 .addMultipartParameter("type", "video")
+                .addMultipartParameter("video", videoAv)
+                .addMultipartParameter("audio", audioAv)
+                .addMultipartParameter("image", imageAv)
                 .addMultipartParameter("text", textForm)
                 .addMultipartParameter("time", date)
-                .addMultipartParameter("timestamp",""+System.currentTimeMillis())
+                .addMultipartParameter("userid",SharedPrefManager.getInstance(AddNews.this).getID())
                 .setTag("uploadTest")
                 .setPriority(Priority.HIGH)
                 .build()
@@ -170,7 +187,7 @@ public class AddNews extends AppCompatActivity {
                             String message = product1.getString("message");
                             if (success == 0) {
 
-                                //.makeText(What_Activity.this, message, //.LENGTH_LONG).show();
+                                Toast.makeText(AddNews.this, message,Toast.LENGTH_LONG).show();
 
 //                                dialog.dismiss();
                             } else {
