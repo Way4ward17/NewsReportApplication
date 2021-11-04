@@ -24,7 +24,7 @@
     <EditText
         android:hint="What happened..."
         android:gravity="top"
-        android:id="@+id/filename"
+        android:id="@+id/textField"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_margin="10dp"

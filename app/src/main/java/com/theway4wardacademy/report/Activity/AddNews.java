@@ -16,14 +16,32 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.androidnetworking.AndroidNetworking;
+
+import com.androidnetworking.common.Priority;
+import com.androidnetworking.error.ANError;
+import com.androidnetworking.interfaces.StringRequestListener;
+import com.androidnetworking.interfaces.UploadProgressListener;
 import com.iceteck.silicompressorr.FileUtils;
 import com.iceteck.silicompressorr.SiliCompressor;
 import com.theway4wardacademy.report.R;
+import com.theway4wardacademy.report.Utils.Constant;
+import com.theway4wardacademy.report.Utils.SharedPrefManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import static com.iceteck.silicompressorr.FileUtils.getDataColumn;
 import static com.iceteck.silicompressorr.FileUtils.isDownloadsDocument;
@@ -35,7 +53,11 @@ public class AddNews extends AppCompatActivity {
     ImageView imageView1, imageView2;
     File videoFile, fileVideoImage;
     Uri videoUri, videoImageUri;
+    EditText text;
     MediaMetadataRetriever retriever;
+
+    String textForm;
+    String date;
 
 
     private static final String IMAGE_DIRECTORY = "/Report";
@@ -51,6 +73,7 @@ public class AddNews extends AppCompatActivity {
 
         imageView1 = (ImageView)findViewById(R.id.imageView1);
         imageView2 = (ImageView)findViewById(R.id.imageView2);
+        text = (EditText)findViewById(R.id.textField);
 
 
         mGetContentAudio = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
@@ -103,17 +126,94 @@ public class AddNews extends AppCompatActivity {
     }
 
 
-    private void ImageUpload(){
+    public String getTimestamp() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.ENGLISH);
+        sdf.setTimeZone(TimeZone.getTimeZone("Africa/Lagos"));
+        return sdf.format(new Date());
+    }
+
+    private void getData(){
+         textForm = text.getText().toString();
+         date = getTimestamp();
 
     }
 
 
-    private void VideoUpload(){
+
+    private void UploadVideo(){
+        getData();
+        AndroidNetworking.upload(Constant.UPLOADVIDEP)
+                .addMultipartFile("image", fileVideoImage)
+                .addMultipartFile("image2", videoFile)
+                .addMultipartParameter("folder", SharedPrefManager.getInstance(AddNews.this).getID())
+                .addMultipartParameter("type", "video")
+                .addMultipartParameter("text", textForm)
+                .addMultipartParameter("time", date)
+                .addMultipartParameter("timestamp",""+System.currentTimeMillis())
+                .setTag("uploadTest")
+                .setPriority(Priority.HIGH)
+                .build()
+                .setUploadProgressListener(new UploadProgressListener() {
+                    @Override
+                    public void onProgress(long bytesUploaded, long totalBytes) {
+                        float progress = (float) bytesUploaded / totalBytes * 100;
+
+
+                    }
+                })
+                .getAsString(new StringRequestListener() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject product1 = new JSONObject(response);
+                            int success = product1.getInt("status");
+                            String message = product1.getString("message");
+                            if (success == 0) {
+
+                                //.makeText(What_Activity.this, message, //.LENGTH_LONG).show();
+
+//                                dialog.dismiss();
+                            } else {
+
+
+//                                dialog.dismiss();
+
+                                finish();
+                            }
+
+                        } catch (JSONException ex) {
+                            ex.printStackTrace();
+//                            dialog.dismiss();
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(ANError anError) {
+                     //   dialog.dismiss();
+                        //.makeText(getApplicationContext(), "Error Uploading" + anError, //.LENGTH_LONG).show();
+
+                    }
+                });
 
     }
+
 
 
     private void AudioUpload(){
+
+    }
+
+
+
+    class ImageUpload extends AsyncTask<File,Void,Void> {
+
+
+        @Override
+        protected Void doInBackground(File... uri) {
+
+            return null;
+        };
 
     }
 
