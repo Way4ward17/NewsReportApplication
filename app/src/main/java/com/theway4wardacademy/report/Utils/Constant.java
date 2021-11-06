@@ -9,6 +9,6 @@ public class Constant {
     public static final String REG = URL+"register.php";
     public static final String GETAGENT = URL+"getagent.php";
     public static final String LOGIN = URL+"login.php";
-    public static final String UPLOADVIDEP = URL+"uploadvideo.php";
+    public static final String UPLOADVIDEP = URL+"uploadvideonew.php";
 
 }

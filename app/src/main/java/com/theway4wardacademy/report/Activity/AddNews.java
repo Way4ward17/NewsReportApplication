@@ -55,7 +55,7 @@ import static com.iceteck.silicompressorr.Util.isExternalStorageDocument;
 public class AddNews extends AppCompatActivity {
 
     ImageView imageView1, imageView2;
-    File videoFile, fileVideoImage;
+    File videoFile, fileVideoImage, audioFile, imageFile;
     Uri videoUri, videoImageUri;
     EditText text;
     MediaMetadataRetriever retriever;
@@ -91,7 +91,9 @@ public class AddNews extends AppCompatActivity {
             public void onActivityResult(Uri result) {
                 audioBtn.setBackgroundColor(Color.parseColor("#FF14A81B"));
                 audioAv = "Yes";
-                //mediaPlayer = MediaPlayer.create(AddNews.this,result);
+
+                String path = FileUtils.getPath(AddNews.this, result);
+                audioFile = new File(path);
 
             }
         });
@@ -113,6 +115,8 @@ public class AddNews extends AppCompatActivity {
                 imageBtn.setBackgroundColor(Color.parseColor("#FF14A81B"));
                 imageAv = "Yes";
                 imageView1.setImageURI(result);
+                String path = FileUtils.getPath(AddNews.this, result);
+                imageFile = new File(path);
 
             }
         });
@@ -136,7 +140,7 @@ public class AddNews extends AppCompatActivity {
     }
 
     public void uploadPost(View view) {
-        UploadVideo();
+       new BackgroundUpload().execute();
     }
 
 
@@ -156,9 +160,12 @@ public class AddNews extends AppCompatActivity {
 
     private void UploadVideo(){
         getData();
+
         AndroidNetworking.upload(Constant.UPLOADVIDEP)
                 .addMultipartFile("image", fileVideoImage)
                 .addMultipartFile("image2", videoFile)
+                .addMultipartFile("audio", audioFile)
+                .addMultipartFile("picture", imageFile)
                 .addMultipartParameter("folder", SharedPrefManager.getInstance(AddNews.this).getID())
                 .addMultipartParameter("type", "video")
                 .addMultipartParameter("video", videoAv)
@@ -191,11 +198,8 @@ public class AddNews extends AppCompatActivity {
 
 //                                dialog.dismiss();
                             } else {
-
-
 //                                dialog.dismiss();
-
-                                finish();
+                                Toast.makeText(AddNews.this, "Post Uploaded",Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException ex) {
@@ -223,12 +227,12 @@ public class AddNews extends AppCompatActivity {
 
 
 
-    class ImageUpload extends AsyncTask<File,Void,Void> {
+    class BackgroundUpload extends AsyncTask<Void,Void,Void> {
 
 
         @Override
-        protected Void doInBackground(File... uri) {
-
+        protected Void doInBackground(Void... uri) {
+            UploadVideo();
             return null;
         };
 
