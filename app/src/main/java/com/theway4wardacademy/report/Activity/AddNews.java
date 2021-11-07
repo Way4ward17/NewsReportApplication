@@ -162,8 +162,8 @@ public class AddNews extends AppCompatActivity {
         getData();
 
         AndroidNetworking.upload(Constant.UPLOADVIDEP)
-                .addMultipartFile("image", fileVideoImage)
-                .addMultipartFile("image2", videoFile)
+                .addMultipartFile("image", videoFile)
+                .addMultipartFile("image2", fileVideoImage)
                 .addMultipartFile("audio", audioFile)
                 .addMultipartFile("picture", imageFile)
                 .addMultipartParameter("folder", SharedPrefManager.getInstance(AddNews.this).getID())
@@ -199,7 +199,7 @@ public class AddNews extends AppCompatActivity {
 //                                dialog.dismiss();
                             } else {
 //                                dialog.dismiss();
-                                Toast.makeText(AddNews.this, "Post Uploaded",Toast.LENGTH_LONG).show();
+                                Toast.makeText(AddNews.this, message,Toast.LENGTH_LONG).show();
                             }
 
                         } catch (JSONException ex) {
